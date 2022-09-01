@@ -45,7 +45,7 @@
 		text-align: center;  
 		position: fixed;
 		top: 33%;
-		left: 50%;
+		left: 23%;
 		transform: translate(-50%, -50%);
 	}
 
