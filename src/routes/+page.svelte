@@ -18,8 +18,8 @@
 	<div class="btn-group">
 		<div class="inner-btn-group">
 			<h1>RPG Creator</h1>
-			<button on:click={handleNewWorldClick}>New World</button>
-			<button on:click={handleLoadWorldClick}>Load World</button>
+			<button class="new-world-btn" on:click={handleNewWorldClick}>New World</button>
+			<button class="add-world-btn" on:click={handleLoadWorldClick}>Load World</button>
 		</div>
 	</div>
 </section>
@@ -53,8 +53,16 @@
 		position:absolute;
 		width: 100px;
 		top:50%;
-		height:10em;
-		margin-top:-5em
+		height:50px;
+		margin-top: -10em;
+	}
+
+	.new-world-btn{
+		margin-top: 25px;
+	}
+
+	.add-world-btn{
+		margin-top: 25px;
 	}
 
 </style>
