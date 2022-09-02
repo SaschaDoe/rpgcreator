@@ -3,7 +3,7 @@
 import RandomTable from '../lib/components/RandomTable.svelte'
 import {getAllTableTitles} from '../lib/tableData.js'
 import {allTables} from '../lib/tableData.js'
-
+	let isIndexShown = true;
 	let allTitles = getAllTableTitles()
 	
 	let isFrontPageActive = true;
@@ -19,6 +19,18 @@ import {allTables} from '../lib/tableData.js'
 	const handleBackClick = () => {
 		isFrontPageActive = true;
 	};
+
+	const handleIndexDropdown = () => {
+		if (isIndexShown){
+
+			isIndexShown = false;
+		}else{
+			isIndexShown = true;
+		}
+		
+	};
+
+	
 	// @ts-ignore
 	function scrollIntoView({ target }) {
 		const el = document.querySelector(target.getAttribute('href'));
@@ -53,8 +65,10 @@ import {allTables} from '../lib/tableData.js'
 		<button on:click={handleBackClick}>Zurück</button>
 	  </div>
 	  
+	  {#if isIndexShown}
 	  <div class="index">
 		<ul>
+			<button on:click={handleIndexDropdown} class="index-dropdown-btn">Einklappen</button>
 			{#each allTitles as specificTtitle}
 			<li>
 				<a href={"#"+specificTtitle} on:click|preventDefault={scrollIntoView}>{specificTtitle}</a>
@@ -62,6 +76,13 @@ import {allTables} from '../lib/tableData.js'
 			{/each}
 		</ul>
 	  </div>
+	  {:else}
+	 	 <div class="index-dropdown">
+	  		<div>
+				<button on:click={handleIndexDropdown}>Aufklappen</button>
+			</div>
+		</div>
+	  {/if}
 	  
 	  <div class="main">
 		<h2 id="1">Tabellen</h2>
@@ -129,6 +150,14 @@ import {allTables} from '../lib/tableData.js'
   overflow: auto;
 }
 
+.index-dropdown {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid grey;
+  height: auto;
+  overflow: auto;
+}
+
 ul{
 	padding: 0;
 }
@@ -138,7 +167,7 @@ li{
 }
 
 .main {
-	height: 1000px;
+	height: 700px;
 	overflow: auto;
   width: 100%;
   float: left;
@@ -202,8 +231,19 @@ li{
 	height: auto;
 	overflow: hidden;
   }
+  .index-dropdown{
+	float: left;
+	width: 20%;
+	height: auto;
+	overflow: hidden;
+  }
+
   .summary{
 	width: 30%;
   }
+  .index-dropdown-btn{
+	display: none;
+  }
+  
 }
 </style>
