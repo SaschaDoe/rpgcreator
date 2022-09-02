@@ -45,7 +45,7 @@ import {allTables} from '../lib/tableData.js'
 
 
 <svelte:head>
-	<title>Home</title>
+	<title>RpgCreator</title>
 	<meta name="description" content="Random tables for rpg" />
 </svelte:head>
 
@@ -63,7 +63,7 @@ import {allTables} from '../lib/tableData.js'
 	{:else}	
 	<div class="header">
 		<button on:click={handleBackClick}>Zurück</button>
-	  </div>
+	</div>
 	  
 	  {#if isIndexShown}
 	  <div class="index">
@@ -138,7 +138,9 @@ import {allTables} from '../lib/tableData.js'
 }
 
 .header {
-  padding: 15px;
+display: flex;
+	
+  align-content: left;
 }
 
 .index {
