@@ -34,15 +34,76 @@
 	</div>
 
 	{:else}	
+	<div class="header">
+		<button on:click={handleBackClick}>Zurück</button>
+	  </div>
+	  
+	  <div class="index">
+		<ul>
+		  <li>1. Rassen Tabelle</li>
+		</ul>
+	  </div>
+	  
+	  <div class="main">
+		<h2>Tabellen</h2>
+		<div>Rassen Tabelle 1w6</div>
+		<table>
+			<tr>
+			  <th>Wurf</th>
+			  <th>Rasse</th>
+			</tr>
+			<tr>
+			  <td>1-3</td>
+			  <td>Mensch</td>
+			</tr>
+			<tr>
+			  <td>4-6</td>
+			  <td>Nicht Mensch</td>
+			</tr>
+		  </table> 
+		  <p></p>
+		  <div>Klassen Tabelle 1w6</div>
+		<table>
+			<tr>
+			  <th>Wurf</th>
+			  <th>Klasse</th>
+			</tr>
+			<tr>
+			  <td>1-3</td>
+			  <td>Spasst</td>
+			</tr>
+			<tr>
+			  <td>4-6</td>
+			  <td>Nicht Spasst</td>
+			</tr>
+		  </table> 
+		  <p></p>
+	  </div>
 
-		<div class="grid-container">
-			<div><button on:click={handleBackClick}>Neu</button></div> 
-			<div ></div> 
-			<div ></div> 
-			<div class="item">Index</div> 
-			<div class="item">Tables</div> 
-			<div class="item">Summary</div> 
-		</div>
+	  <div class="summary">
+		<h2>Zusammenfassung</h2>
+		<div>Charakter 1</div>
+		<div>Mensch</div>
+		<div>Spasst</div>
+		<p></p>
+		<div>Charakter 2</div>
+		<div>Mensch</div>
+		<div>Nicht Spasst</div>
+		<p></p>
+		<div>Charakter 3</div>
+		<div>Mensch</div>
+		<div>Spasst</div>
+		<p></p>
+		<div>Charakter 4</div>
+		<div>Mensch</div>
+		<div>Spasst</div>
+		<p></p>
+		<div>Charakter5</div>
+		<div>Mensch</div>
+		<div>Stark</div>
+
+	  </div>
+	  
 
 	{/if}
 </section>
@@ -53,25 +114,61 @@
 		padding: 1em;
 	}
 
-	
+	* {
+  box-sizing: border-box;
+}
 
-	.item{
-		border: 1px solid #fff;
-	}
+.header {
+  padding: 15px;
+}
 
-	.grid-container{
-		display: grid; 
-  		grid-template-rows: 10% 90%; 
-  		grid-template-columns:10% 60% 30%; 
-		height: 100vh;
-	}
+.index {
+  visibility: hidden;
+  width: 20%;
+  float: left;
+  padding: 5px;
+  border: 1px solid grey;
+}
+
+ul{
+	padding: 0;
+}
+
+li{
+	list-style-type: none;
+}
+
+.main {
+  width: 100%;
+  float: left;
+  padding: 15px;
+  border: 1px solid grey;
+  
+}
+
+table, th, td{
+	border: 1px solid;
+	width: 100%;
+	table-layout: fixed
+}
+
+.summary {
+  width: 100%;
+  float: left;
+  padding: 15px;
+  border: 1px solid grey;
+}
 
 	h1 {
-		color: #ff3e00;
 		text-transform: uppercase;
-		font-size: 4em;
+		font-size: 3em;
 		font-weight: 100;
 		
+	}
+
+	h2{
+		font-size: 2em;
+		font-weight: 60;
 	}
 
 	.btn-group{
@@ -98,4 +195,15 @@
 		margin-top: 25px;
 	}
 
+	@media only screen and (min-width: 768px) {
+  .main {
+    width: 50%;
+  }
+  .index{
+	visibility: visible;
+  }
+  .summary{
+	width: 30%;
+  }
+}
 </style>
