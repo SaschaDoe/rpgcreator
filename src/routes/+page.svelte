@@ -1,6 +1,11 @@
 <script>
-	import RandomTables from '../lib/components/RandomTables.svelte'
 
+import RandomTable from '../lib/components/RandomTable.svelte'
+import {getAllTableTitles} from '../lib/tableData.js'
+import {allTables} from '../lib/tableData.js'
+
+	let allTitles = getAllTableTitles()
+	
 	let isFrontPageActive = true;
 
 	const handleNewWorldClick = () => {
@@ -14,6 +19,14 @@
 	const handleBackClick = () => {
 		isFrontPageActive = true;
 	};
+	// @ts-ignore
+	function scrollIntoView({ target }) {
+		const el = document.querySelector(target.getAttribute('href'));
+		if (!el) return;
+    el.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,13 +55,28 @@
 	  
 	  <div class="index">
 		<ul>
-		  <li>1. Rassen Tabelle</li>
+			{#each allTitles as specificTtitle}
+			<li>
+				<a href={"#"+specificTtitle} on:click|preventDefault={scrollIntoView}>{specificTtitle}</a>
+			</li>
+			{/each}
 		</ul>
 	  </div>
 	  
 	  <div class="main">
-		<h2>Tabellen</h2>
-		<RandomTables/>
+		<h2 id="1">Tabellen</h2>
+			
+		{#each allTables as table}
+		<div id={table.title}>
+			<RandomTable 
+		  		name={table.title} 
+		  		explanation={table.explanation} 
+		  		role={table.role} 
+		  		attributeName={table.attributeName} 
+		 		 contents={table.contents} />
+				</div>
+	  	{/each}
+
 	  </div>
 
 	  <div class="summary">
@@ -110,6 +138,8 @@ li{
 }
 
 .main {
+	height: 1000px;
+	overflow: auto;
   width: 100%;
   float: left;
   padding: 15px;
@@ -162,7 +192,7 @@ li{
 		margin-top: 25px;
 	}
 
-	@media only screen and (min-width: 768px) {
+	@media only screen and (min-width: 1025px) {
   .main {
     width: 50%;
   }

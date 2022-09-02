@@ -2,7 +2,7 @@
 import { each } from "svelte/internal";
 
 
-    export let title = "title missing";
+    export let name = "title missing";
     export let explanation = "explanation missing"
     export let role = "role missing"
     export let attributeName = "attribute name missing"
@@ -12,7 +12,7 @@ import { each } from "svelte/internal";
     ];
 
 </script>
-<h2>{title}</h2>
+<h2>{name}</h2>
 <div>{explanation}</div>
 <div><button>{role}</button></div>
 <table>
