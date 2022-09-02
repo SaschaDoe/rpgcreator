@@ -226,22 +226,24 @@ li{
 	@media only screen and (min-width: 1025px) {
   .main {
     width: 50%;
+	height: 1000px;
   }
   .index{
 	float: left;
 	width: 20%;
-	height: auto;
+	height: 1000px;
 	overflow: hidden;
   }
   .index-dropdown{
 	float: left;
 	width: 20%;
-	height: auto;
+	height: 1000px;
 	overflow: hidden;
   }
 
   .summary{
 	width: 30%;
+	height: 1000px;
   }
   .index-dropdown-btn{
 	display: none;
