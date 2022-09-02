@@ -1,4 +1,6 @@
 <script>
+	import RandomTables from '../lib/components/RandomTables.svelte'
+
 	let isFrontPageActive = true;
 
 	const handleNewWorldClick = () => {
@@ -46,38 +48,7 @@
 	  
 	  <div class="main">
 		<h2>Tabellen</h2>
-		<div>Rassen Tabelle 1w6</div>
-		<table>
-			<tr>
-			  <th>Wurf</th>
-			  <th>Rasse</th>
-			</tr>
-			<tr>
-			  <td>1-3</td>
-			  <td>Mensch</td>
-			</tr>
-			<tr>
-			  <td>4-6</td>
-			  <td>Nicht Mensch</td>
-			</tr>
-		  </table> 
-		  <p></p>
-		  <div>Klassen Tabelle 1w6</div>
-		<table>
-			<tr>
-			  <th>Wurf</th>
-			  <th>Klasse</th>
-			</tr>
-			<tr>
-			  <td>1-3</td>
-			  <td>Spasst</td>
-			</tr>
-			<tr>
-			  <td>4-6</td>
-			  <td>Nicht Spasst</td>
-			</tr>
-		  </table> 
-		  <p></p>
+		<RandomTables/>
 	  </div>
 
 	  <div class="summary">
@@ -146,11 +117,7 @@ li{
   
 }
 
-table, th, td{
-	border: 1px solid;
-	width: 100%;
-	table-layout: fixed
-}
+
 
 .summary {
   width: 100%;
