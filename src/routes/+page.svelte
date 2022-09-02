@@ -122,11 +122,11 @@ import {allTables} from '../lib/tableData.js'
 }
 
 .index {
-  visibility: hidden;
-  width: 20%;
-  float: left;
+  width: 100%;
   padding: 5px;
   border: 1px solid grey;
+  height: 200px;
+  overflow: auto;
 }
 
 ul{
@@ -197,7 +197,10 @@ li{
     width: 50%;
   }
   .index{
-	visibility: visible;
+	float: left;
+	width: 20%;
+	height: auto;
+	overflow: hidden;
   }
   .summary{
 	width: 30%;
