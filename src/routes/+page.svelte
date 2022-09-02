@@ -1,12 +1,20 @@
 <script>
+	let isFrontPageActive = true;
+
 	const handleNewWorldClick = () => {
-		window.alert("New World Not implemented yet")
+		isFrontPageActive = false;
 	};
 
 	const handleLoadWorldClick = () => {
 		window.alert("Load World Not implemented yet")
 	};
+
+	const handleBackClick = () => {
+		isFrontPageActive = true;
+	};
 </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <svelte:head>
@@ -15,6 +23,8 @@
 </svelte:head>
 
 <section>
+	{#if isFrontPageActive}	
+	
 	<div class="btn-group">
 		<div class="inner-btn-group">
 			<h1>RPG Creator</h1>
@@ -22,16 +32,39 @@
 			<button class="add-world-btn" on:click={handleLoadWorldClick}>Load World</button>
 		</div>
 	</div>
+
+	{:else}	
+
+		<div class="grid-container">
+			<div><button on:click={handleBackClick}>Neu</button></div> 
+			<div ></div> 
+			<div ></div> 
+			<div class="item">Index</div> 
+			<div class="item">Tables</div> 
+			<div class="item">Summary</div> 
+		</div>
+
+	{/if}
 </section>
 
 <style>
 	section {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
 	}
 
+	
+
+	.item{
+		border: 1px solid #fff;
+	}
+
+	.grid-container{
+		display: grid; 
+  		grid-template-rows: 10% 90%; 
+  		grid-template-columns:10% 60% 30%; 
+		height: 100vh;
+	}
 
 	h1 {
 		color: #ff3e00;
