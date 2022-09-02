@@ -131,7 +131,6 @@ import {allTables} from '../lib/tableData.js'
 <style>
 	section {
 		text-align: center;
-		padding: 1em;
 	}
 
 	* {
@@ -167,7 +166,7 @@ li{
 }
 
 .main {
-	height: 700px;
+	height: 550px;
 	overflow: auto;
   width: 100%;
   float: left;
@@ -183,6 +182,7 @@ li{
   float: left;
   padding: 15px;
   border: 1px solid grey;
+  overflow: auto;
 }
 
 	h1 {
