@@ -3,6 +3,8 @@ import { fade } from 'svelte/transition';
 import RandomTable from '../lib/components/RandomTable.svelte'
 import {getAllTableTitles} from '../lib/tableData.js'
 import {allTables} from '../lib/tableData.js'
+import SummaryEntry from '../lib/components/summaryEntry.svelte'
+
 	let isIndexShown = true;
 	let allTitles = getAllTableTitles()
 	
@@ -115,26 +117,27 @@ import {allTables} from '../lib/tableData.js'
 
 	  <div class="summary">
 		<h2 id="summary-header">Zusammenfassung</h2>
-		<div>Charakter 1</div>
-		<div>Mensch</div>
-		<div>Spasst</div>
-		<p></p>
-		<div>Charakter 2</div>
-		<div>Mensch</div>
-		<div>Nicht Spasst</div>
-		<p></p>
-		<div>Charakter 3</div>
-		<div>Mensch</div>
-		<div>Spasst</div>
-		<p></p>
-		<div>Charakter 4</div>
-		<div>Mensch</div>
-		<div>Spasst</div>
-		<p></p>
-		<div>Charakter5</div>
-		<div>Mensch</div>
-		<div>Stark</div>
-
+		<div class="summary-chars summary-group">
+			<h3>Charaktere</h3>
+			<SummaryEntry name="Erster seiner Art" race="Spasst"/>
+			<SummaryEntry name="Zweiter seiner Art" race="Spasst"/>
+		</div>
+		<div class="summary-world summary-group">
+			<h3>Welt</h3>
+			<SummaryEntry name="Erster seiner Art" race="Spasst"/>
+		</div>
+		<div class="summary-fractions summary-group">
+			<h3>Fraktionen</h3>
+			<SummaryEntry name="Erster seiner Art" race="Spasst"/>
+		</div>
+		<div class="summary-artefacts summary-group">
+			<h3>Artefakte</h3>
+			<SummaryEntry name="Erster seiner Art" race="Spasst"/>
+		</div>
+		<div class="summary-history summary-group">
+			<h3>Geschichte</h3>
+			<SummaryEntry name="Erster seiner Art" race="Spasst"/>
+		</div>
 	  </div>
 	  
 
@@ -142,6 +145,17 @@ import {allTables} from '../lib/tableData.js'
 </section>
 
 <style>
+.summary-group{
+	border: 1px solid grey;
+}
+
+.summary {
+  width: 100%;
+  float: left;
+  padding: 15px;
+  border: 1px solid grey;
+  overflow: auto;
+}
 	section {
 		text-align: center;
 	}
@@ -210,13 +224,6 @@ li{
   
 }
 
-.summary {
-  width: 100%;
-  float: left;
-  padding: 15px;
-  border: 1px solid grey;
-  overflow: auto;
-}
 
 	h1 {
 		text-transform: uppercase;
