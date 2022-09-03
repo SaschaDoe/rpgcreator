@@ -1,6 +1,5 @@
 <script>
-import { each } from "svelte/internal";
-
+    import {roleDice} from "./../diceRole"
 
     export let name = "title missing";
     export let explanation = "explanation missing"
@@ -11,21 +10,38 @@ import { each } from "svelte/internal";
         {role: '2', message: 'what happens now', id: 2},
     ];
 
+    let diceResult = 0;
+    const handleRoleClick = (diceRoleString = "") => {
+    diceResult = roleDice(diceRoleString);
+       window.alert(diceResult)
+	};
+
 </script>
+
+
 <h2>{name}</h2>
 <div>{explanation}</div>
-<div><button>{role}</button></div>
+<div><button on:click={() => handleRoleClick(role)}>{role}</button></div>
 <table>
     <tr>
         <th>Wurf</th>
         <th>{attributeName}</th>
       </tr>
     {#each contents as tableEntry}
-        <tr>
-            <td>{tableEntry.role}</td>
-            <td>{tableEntry.message}</td>
-        </tr>
+    {#if diceResult === tableEntry.id}
+    <tr id="tr{tableEntry.id}" class="greenFlickerClass">
+        <td>{tableEntry.role}</td>
+        <td>{tableEntry.message}</td>
+    </tr>
+    {:else}
+    <tr id="tr{tableEntry.id}">
+        <td>{tableEntry.role}</td>
+        <td>{tableEntry.message}</td>
+    </tr>
+    {/if}
+
     {/each}
+
   </table> 
   <p></p>
 
@@ -61,6 +77,18 @@ div{
 
 button{
     margin: 5px 0px;
+}
+
+.greenFlickerClass{
+    -webkit-animation-name: greenFlicker; 
+    -webkit-animation-iteration-count: 1;  
+    -webkit-animation-duration: 2s; 
+}
+
+@-webkit-keyframes greenFlicker {  
+    0% { background-color: transparent; }
+    50% { background-color: green; }
+    100% { background-color: transparent; }
 }
     
 </style>
