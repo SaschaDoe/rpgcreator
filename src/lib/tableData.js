@@ -22,3 +22,23 @@
       for (let i = 0; i < 10; i++) {
         allTables.push({title: "Klassen"+i, explanation: "Würfle deine Klasse aus", role:"1w1000", attributeName:"Klasse", contents:classTableContent})
       }; 
+
+      export function isInsideRole(role = "", diceResult = 0){
+        let roleArray = role.split("-");
+        if (roleArray.length == 1){
+            let roleInt = parseInt(role);
+            if(roleInt == diceResult){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            let roleMin = parseInt(roleArray[0]);
+            let roleMax = parseInt(roleArray[1]);
+            if (diceResult >= roleMin && diceResult <= roleMax){
+                return true;
+            }else{
+                return false;
+            }
+        }
+      }

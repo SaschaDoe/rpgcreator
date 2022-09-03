@@ -1,5 +1,6 @@
 <script>
     import {roleDice} from "./../diceRole"
+    import {isInsideRole} from "../tableData"
 
     export let name = "title missing";
     export let explanation = "explanation missing"
@@ -28,7 +29,7 @@
         <th>{attributeName}</th>
       </tr>
     {#each contents as tableEntry}
-    {#if diceResult === tableEntry.id}
+    {#if  isInsideRole(tableEntry.role, diceResult)}
     <tr id="tr{tableEntry.id}" class="greenFlickerClass">
         <td>{tableEntry.role}</td>
         <td>{tableEntry.message}</td>
