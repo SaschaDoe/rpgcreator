@@ -1,5 +1,5 @@
 <script>
-
+import { fade } from 'svelte/transition';
 import RandomTable from '../lib/components/RandomTable.svelte'
 import {getAllTableTitles} from '../lib/tableData.js'
 import {allTables} from '../lib/tableData.js'
@@ -30,6 +30,17 @@ import {allTables} from '../lib/tableData.js'
 		
 	};
 
+	let isToSummaryClicked = false;
+	const handleToSummaryClick = () => {
+		if (isToSummaryClicked){
+
+			isToSummaryClicked = false;
+		}else{
+			isToSummaryClicked = true;
+		}
+		
+	};
+
 	
 	// @ts-ignore
 	function scrollIntoView({ target }) {
@@ -51,7 +62,6 @@ import {allTables} from '../lib/tableData.js'
 
 <section>
 	{#if isFrontPageActive}	
-	
 	<div class="btn-group">
 		<div class="inner-btn-group">
 			<h1>RPG Creator</h1>
@@ -61,12 +71,15 @@ import {allTables} from '../lib/tableData.js'
 	</div>
 
 	{:else}	
-	<div class="header">
+	<div class="header" id="header">
 		<button on:click={handleBackClick}>Zurück</button>
 	</div>
-	  
+
+	<a class="to-summary-btn" href={"#summary-header"} on:click|preventDefault={scrollIntoView}>\|/</a>
+	<a class="to-index-btn" href={"#header"} on:click|preventDefault={scrollIntoView}>/|\</a>
+	
 	  {#if isIndexShown}
-	  <div class="index">
+	  <div transition:fade class="index">
 		<ul>
 			<button on:click={handleIndexDropdown} class="index-dropdown-btn">Einklappen</button>
 			{#each allTitles as specificTtitle}
@@ -101,7 +114,7 @@ import {allTables} from '../lib/tableData.js'
 	  </div>
 
 	  <div class="summary">
-		<h2>Zusammenfassung</h2>
+		<h2 id="summary-header">Zusammenfassung</h2>
 		<div>Charakter 1</div>
 		<div>Mensch</div>
 		<div>Spasst</div>
@@ -143,6 +156,26 @@ display: flex;
   align-content: left;
 }
 
+.to-summary-btn{
+	position: fixed;
+    top: 1em;
+    right: 1em;
+	height: 25px;
+	width: 25px;
+	z-index: 7;
+	color: black;
+}
+
+.to-index-btn{
+	position: fixed;
+    top: 1em;
+    right: 2em;
+	height: 25px;
+	width: 25px;
+	z-index: 7;
+	color: black;
+}
+
 .index {
   width: 100%;
   padding: 5px;
@@ -176,8 +209,6 @@ li{
   border: 1px solid grey;
   
 }
-
-
 
 .summary {
   width: 100%;
@@ -239,6 +270,14 @@ li{
 	width: 20%;
 	height: 1000px;
 	overflow: hidden;
+  }
+
+  .to-summary-btn{
+	display: none;
+  }
+
+  .to-index-btn{
+	display: none;
   }
 
   .summary{
