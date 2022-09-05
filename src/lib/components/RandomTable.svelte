@@ -10,11 +10,25 @@
         {role: '1', message: 'what happens', id: 1},
         {role: '2', message: 'what happens now', id: 2},
     ];
+    export let forWhichGroup = "chars"
+    import { createEventDispatcher } from 'svelte';
 
+    const dispatch = createEventDispatcher();
+
+    // when the handler is triggered in on:click
+    // can subscribe to the on:close message in our App.svelte
+    // and do what's needed
+    const diceResultHandler = () => dispatch('diceRoled', {
+			diceResult: diceResult.toString(),
+            tableName: name,
+            forWhichGroup: forWhichGroup,
+            content: contents.filter((content) => isInsideRole(content.role,diceResult))[0].message
+		});
     let diceResult = 0;
+
     const handleRoleClick = (diceRoleString = "") => {
-    diceResult = roleDice(diceRoleString);
-       window.alert(diceResult)
+        diceResult = roleDice(diceRoleString);
+        diceResultHandler();
 	};
 
 </script>

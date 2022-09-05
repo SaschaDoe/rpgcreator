@@ -4,8 +4,9 @@
 	import {getAllTableTitles} from '../lib/tableData.js'
 	import {allTables} from '../lib/tableData.js'
 	import Summary from '../lib/components/summary.svelte'
+	import CharsStore from '../lib/summaryData';
+	import {Char, charClasses, races} from '../lib/objects/char.js'
 
-	
 		let isIndexShown = true;
 		let allTitles = getAllTableTitles()
 		
@@ -30,21 +31,39 @@
 			}else{
 				isIndexShown = true;
 			}
-			
 		};
-	
-		let isToSummaryClicked = false;
-		const handleToSummaryClick = () => {
-			if (isToSummaryClicked){
-	
-				isToSummaryClicked = false;
-			}else{
-				isToSummaryClicked = true;
+
+		/**
+* @param {{ detail: { diceResult: any; tableName: any; content: any; forWhichGroup: any; }; }} diceResult
+*/
+		function diceResultHandler(diceResult) {
+			let forWhichGroup = diceResult.detail.forWhichGroup;
+			window.alert(forWhichGroup)
+			if(forWhichGroup == "chars"){
+				if(selectedId == -1){
+					let id = $CharsStore.length;
+					let char = {
+						char: new Char(id)
+						.withName("Char Name"+id)
+						.withRace(diceResult.detail.diceResult)
+						.withClass(charClasses.None), isClicked: false}
+            		CharsStore.update(currentChars => {
+                	return [...currentChars, char];
+            })
+				}
 			}
 			
-		};
-	
-		
+		}
+		let selectedGroup = "";
+		let selectedId = -1;
+		/**
+* @param {{ detail: { selectedGroup: any; selectedElementId: any; }; }} selection
+*/
+		function updateSummarySelection(selection){
+			selectedGroup = selection.detail.selectedGroup;
+			selectedId = parseInt(selection.detail.selectedElementId)
+		}
+
 		// @ts-ignore
 		function scrollIntoView({ target }) {
 			const el = document.querySelector(target.getAttribute('href'));
@@ -110,14 +129,17 @@
 					  explanation={table.explanation} 
 					  role={table.role} 
 					  attributeName={table.attributeName} 
-					  contents={table.contents} />
+					  contents={table.contents}
+					  forWhichGroup={table.forWhichGroup}
+					  on:diceRoled = {diceResultHandler} />
 					</div>
 			  {/each}
 	
 		  </div>
-	
+
 		  <div class="summary">
-			<Summary></Summary>
+			<Summary
+				on:summaryElementSelected = {updateSummarySelection}/>
 		  </div>
 		  
 		{/if}
@@ -271,5 +293,5 @@
 	  }
 	  
 	}
-	</style>
+</style>
 	

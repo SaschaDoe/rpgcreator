@@ -1,5 +1,7 @@
 <script>
-    export let charEntry = {id: 2, name: "Zweiter seiner Art", race: "Spasst", isClicked: false}
+import { Char, charClasses, races } from "$lib/objects/char";
+
+export let charEntry = {char: new Char(1).withRace(races.None).withClass(charClasses.None), isClicked: false};
     
     const clickHandler = () => {
         charEntry.isClicked = !charEntry.isClicked;
@@ -8,13 +10,13 @@
 
 {#if charEntry.isClicked}
 <div class="container clicked" on:click={() => clickHandler()}>
-    <p class="name">{charEntry.name}</p>
-    <p>{"Klasse: "+charEntry.race}</p>
+    <p class="name">{charEntry.char.name}</p>
+    <p>{"Klasse: "+charEntry.char.charClass}</p>
 </div>
 {:else}
 <div class="container" on:click={clickHandler}>
-    <p class="name">{charEntry.name}</p>
-    <p>{"Klasse: "+charEntry.race}</p>
+    <p class="name">{charEntry.char.name}</p>
+    <p>{"Klasse: "+charEntry.char.charClass}</p>
 </div>
 {/if}
 

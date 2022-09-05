@@ -9,12 +9,12 @@
 {#if worldEntry.isClicked}
 <div class="container clicked" on:click={() => clickHandler()}>
     <p class="name">{worldEntry.name}</p>
-    <p>{"Klasse: "+worldEntry.race}</p>
+    <p>{"Planet: "+worldEntry.race}</p>
 </div>
 {:else}
 <div class="container" on:click={clickHandler}>
     <p class="name">{worldEntry.name}</p>
-    <p>{"Klasse: "+worldEntry.race}</p>
+    <p>{"Planet: "+worldEntry.race}</p>
 </div>
 {/if}
 

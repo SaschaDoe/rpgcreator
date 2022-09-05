@@ -1,9 +1,7 @@
 <script>
+    import { Char, charClasses, races } from "$lib/objects/char";
     import CharEntry from "./charEntry.svelte"
-    let charEntries = [
-        {id: 0, name: "Erster seiner Art", race: "Spasst", isClicked: false},
-        {id: 1, name: "Zweiter seiner Art", race: "Spasst", isClicked: false},
-    ]
+    import CharsStore from '../../lib/summaryData';
 
     import WorldEntry from "./worldEntry.svelte"
     let worldEntries = [
@@ -15,34 +13,69 @@
     function clickedOnChar(id=0) {
         isCharClicked = true;
         isWorldClicked = false;
+        selectedGroup = "chars"
         resetSelection()
-        for(let i = 0; i < charEntries.length; i++){
-            if(i == id){
-                charEntries[i].isClicked = true;
-            }
-        }
+        setSelected($CharsStore, id);
 	}
 
     let isWorldClicked = false;
     function clickedOnWorld(id=0) {
         isWorldClicked = true;
         isCharClicked = false;
-        resetSelection()
-        for(let i = 0; i < worldEntries.length; i++){
-            if(i == id){
-                worldEntries[i].isClicked = true;
-            }
-        }
+        selectedGroup = "world";
+        resetSelection();
+        setSelected(worldEntries, id);
 	}
 
+    /**
+* @param {any} entries
+*/
+    function setSelected(entries,id=0){
+        for(let i = 0; i < entries.length; i++){
+            
+            if(selectedId != id)
+            {
+                if(i == id)
+                {
+                    entries[i].isClicked = true;
+                }
+            }
+        }
+
+        if(selectedId == id){
+            selectedId = -1;
+        }else{
+            selectedId = id;
+        }
+
+        selectionHandler();
+    }
+
+
     function resetSelection(){
+        
         for(let i = 0; i < worldEntries.length; i++){
                 worldEntries[i].isClicked = false;
         }
-        for(let i = 0; i < charEntries.length; i++){
-                charEntries[i].isClicked = false;
+        for(let i = 0; i < $CharsStore.length; i++){
+            $CharsStore[i].isClicked = false;
         }
     }
+    let selectedGroup = "None";
+    let selectedId = -1;
+
+    import { createEventDispatcher } from 'svelte';
+
+
+    const dispatch = createEventDispatcher();
+
+    // when the handler is triggered in on:click
+    // can subscribe to the on:close message in our App.svelte
+    // and do what's needed
+    const selectionHandler = () => dispatch('summaryElementSelected', {
+			selectedGroup: selectedGroup,
+            selectedElementId: selectedId.toString(),
+		});
 
 </script>
 
@@ -50,8 +83,8 @@
     <div class="summary-chars summary-group">
         <h3 class="{isCharClicked ? "clicked" : ""} ">Charaktere</h3>
         <ul>
-            {#each charEntries as charEntry}
-                    <div on:click={() => clickedOnChar(charEntry.id)}>
+            {#each $CharsStore as charEntry}
+                    <div on:click={() => clickedOnChar(charEntry.char.id)}>
                         <CharEntry bind:charEntry={charEntry}/>
                     </div>
             {/each}

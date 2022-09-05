@@ -1,4 +1,52 @@
 
+    export class RandomTable {
+      constructor(){
+          this.title = "";
+          this.role = new Role();
+          /**
+         * @type {RandomTableEntry[]}
+         */
+          this.entries = []
+      }
+      
+      withTitle(title = ""){
+          this.name = name;
+          return this;
+      }
+      
+      withRole(role = new Role(1)){
+        this.role = role;
+        return this;
+      }
+
+      withEntry(randomTableEntry = new RandomTableEntry()){
+        this.entries.push(randomTableEntry);
+        return this;
+      }
+  }
+
+  export class RandomTableEntry{
+    constructor(minRole=0, maxRole=0, contentText=""){
+      this.minRole = minRole;
+      this.maxRole = maxRole;
+      this.contentText = contentText;
+    }
+  }
+
+  export const diceTypes = {
+    Six : 6,
+    Twenty : 20
+  }
+
+  export class Role{
+    constructor(multiplier = 0, diceType = diceTypes.Six, summand = 0){
+      this.multiplier = multiplier;
+      this.diceType = diceType;
+      this.summand = summand;
+    }
+  }
+    
+    
     let classTableContent = [{role: '1', message: 'Spasst', id: 1},];
 
     for (let i = 0; i < 999; i++) {
